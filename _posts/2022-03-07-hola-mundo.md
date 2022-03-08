@@ -13,7 +13,7 @@ set -x
 ## Por Racones ya sean esteticas o por facilitar el proceso a la cpu ponemos aprate las variables 
 USERNAME=ubuntu
 
-![img][{{https://yasin-akil.github.io/}}/yasin-akil.github.io/_posts/Screenshot_20220308_125101.png]
+![img][{{https://yasin-akil.github.io/}}(yasin-akil.github.io/_posts/Screenshot_20220308_125101.png)
 
 # Actualizamos el sistema
 apt update
