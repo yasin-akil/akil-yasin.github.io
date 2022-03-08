@@ -4,26 +4,44 @@ title:  "Welcome to Jekyll!"
 date:   2022-03-07 03:29:04 -0600
 categories: jekyll update
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
+# Docker-compose.yaml
+El siguiente paso es crear el archivo yaml  donde espeficicaremos la version que sera la 3.3 y los servicios Wordpress, mysql, phpmyadmin y hhtps-portal para el acceso https
+## Wordpress
+![img]({{ site.url }}/Screenshot_20220308_125306.png)
+> wordpress:
+>    image: wordpress:php8.0
+>    environment:
+>      - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST}
+>      - WORDPRESS_DB_USER=${WORDPRESS_DB_USER}
+>      - WORDPRESS_DB_PASSWORD=${WORDPRESS_DB_PASSWORD}
+>      - WORDPRESS_DB_NAME=${WORDPRESS_DB_NAME}
+>    restart: always
+>    volumes:
+>      - wordpress_data:/var/www/html
+>    depends_on:
+>      - mysql
+>    networks:
+>      - frontend_network
+>      - backend_network
 
-Jekyll requires blog post files to be named according to the following format:
+En estas lineas asignamos en enviroment el host de nuestra base de datos de wordpress, el usuario, contraseña y nombre de la base de datos
 
-`YEAR-MONTH-DAY-title.MARKUP`
+añadimos la directiva de restart always para que este en constante reinicio
+el volumen donde se guardara junto al servicio que depende eneste caso dependera de mysql
+y por ultimo toca asignarle las redes que seran una fronted y otra backend
 
-Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit numbers, and `MARKUP` is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+## Mysql
 
-Jekyll also offers powerful support for code snippets:
+> mysql:
+>    image: mysql:8.0 
+>    environment:
+>      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+>      - MYSQL_DATABASE=${WORDPRESS_DB_NAME}
+>      - MYSQL_USER=${WORDPRESS_DB_USER}
+>      - MYSQL_PASSWORD=${WORDPRESS_DB_PASSWORD}
+>    volumes:
+>      - mysql_data:/var/lib/mysql
+>    networks:    
+>      - backend_network
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
-
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
-
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+en mysql lo mismo que en worpress asignamos la imagen 8.0 y lsa variables de .env, le asignamos el volumen y la red.
