@@ -5,11 +5,15 @@ date:   2022-03-07 04:39:26 -0600
 categories: jekyll update
 ---
 
-#!/bin/bash
+
+## Primer paso sera ejecutar el script de instalacion del docker en el cual lo primero que hacemos un set -x hace que el shell para salir si cualquier subcomando o canalización devuelve un estado distinto de cero.
+
 set -x
 
-# Variables
+## Por Racones ya sean esteticas o por facilitar el proceso a la cpu ponemos aprate las variables 
 USERNAME=ubuntu
+
+![img](https://drive.google.com/file/d/1icvBzv_BIreXN_ENVJB3ryqaextpsPQP/view?usp=sharing)
 
 # Actualizamos el sistema
 apt update
