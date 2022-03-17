@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "variables"
-date:   2020-10-20 04:39:26 -0600
+date:   2020-10-20 04:39:26 
 categories: jekyll update
 ---
 
